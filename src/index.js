@@ -1,13 +1,15 @@
+const mongoose = require("mongoose");
 const User = require("./dataModel/user.model");
 const app = require("./server");
 
 const uri =
-    "mongodb+srv://saadullah:saad2003@devminified.hiye9xh.mongodb.net/?retryWrites=true&w=majority&appName=Devminified";
+    "mongodb+srv://saadullah:saad2003@devminified.hiye9xh.mongodb.net/userManagement?retryWrites=true&w=majority&appName=Devminified";
 
 console.log("Connecting to MongoDB");
 
 async function start() {
-    let initialized = await User.initialize()
+    let initialized = await mongoose
+        .connect(uri)
         .then(() => {
             console.log("Successfully connected to MongoDB");
             return true;
