@@ -6,18 +6,19 @@ const {
     updateUser,
     retireUser,
 } = require("../controllers/api.controller");
+const { auth } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.post("/User", crateUser);
+router.post("/User", auth, crateUser);
 
-router.get("/User", getUsers);
+router.get("/User", auth, getUsers);
 
-router.delete("/User", delUsers);
+router.delete("/User", auth, delUsers);
 
-router.put("/User", updateUser);
+router.put("/User", auth, updateUser);
 
-router.patch("/User", retireUser);
+router.patch("/User", auth, retireUser);
 
 router.get("/test", (req, res) => {
     res.send({ status: "OK" });
@@ -34,7 +35,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /User:
+ * /api/User:
  *   post:
  *     summary: Create a user
  *     description: Only admins can create other users.

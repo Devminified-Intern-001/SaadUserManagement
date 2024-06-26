@@ -1,2 +1,4 @@
 node_modules
 rough.yml
+.env.*
+.env

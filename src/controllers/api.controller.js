@@ -1,5 +1,5 @@
 const httpStatus = require("http-status");
-const userService = require("../services/user.services");
+const userService = require("../services/user.service");
 const { response } = require("express");
 
 const crateUser = async (req, res) => {

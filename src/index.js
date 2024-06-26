@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const User = require("./dataModel/user.model");
 const app = require("./server");
+const { verifyConnection } = require("./services/email.service");
+require("dotenv").config();
 
-const uri =
-    "mongodb+srv://saadullah:saad2003@devminified.hiye9xh.mongodb.net/userManagement?retryWrites=true&w=majority&appName=Devminified";
+const uri = process.env.MONGO_URI;
 
 console.log("Connecting to MongoDB");
 
@@ -12,7 +13,16 @@ async function start() {
         .connect(uri)
         .then(() => {
             console.log("Successfully connected to MongoDB");
-            return true;
+            console.log("Connecting to Gmail");
+            return verifyConnection()
+                .then((val) => {
+                    console.log("Successfully connected to Gmail");
+                    return val;
+                })
+                .catch((error) => {
+                    console.error(error);
+                    return false;
+                });
         })
         .catch((error) => {
             console.log("");
@@ -25,7 +35,7 @@ async function start() {
             console.log("Server is running");
         });
     else {
-        console.error("ERROR: Unable to connected to MongoDB");
+        console.error("ERROR: Unable to connected to MongoDB or Gmail");
     }
 }
 

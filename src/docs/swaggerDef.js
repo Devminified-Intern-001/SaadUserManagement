@@ -15,7 +15,7 @@ const swaggerDef = {
     servers: [
         {
             description: "Main API Endpoint",
-            url: `http://localhost:5000/api`,
+            url: `http://localhost:5000`,
         },
     ],
 };
